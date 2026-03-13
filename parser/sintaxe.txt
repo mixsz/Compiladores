@@ -1,0 +1,42 @@
+expressao --> soma
+
+soma --> mult somaResto
+
+somaResto --> '+' mult somaResto | '-' mult somaResto | ε
+
+mult --> valor multResto
+
+multResto --> '*' valor multResto | '/' valor multResto | ε
+
+valor --> inteiro | decimal | id | '(' expressao ')' | '-' valor | texto
+
+
+
+
+tipos --> tipoInt | tipoFloat | tipoString
+
+declarar --> tipos id inicializar
+
+inicializar --> opAtrib expressao | ε
+
+atribuir --> id opAtrib expressao
+
+
+
+
+estruturaIf --> se '(' condicao ')' '{' bloco '}' estruturaElseif estruturaElse
+
+estruturaElseif --> senaose '(' condicao ')' '{' bloco '}' estruturaElseif | ε
+
+estruturaElse --> senao '{' bloco '}' | ε
+
+condicao --> expressao opRelac expressao
+
+
+
+
+bloco --> instrucao bloco | ε
+
+instrucao --> declarar fim | atribuir fim | estruturaIf  // *IMPORTANTE: ADICIONAR LOOP E ETC AQUI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+

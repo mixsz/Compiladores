@@ -1,7 +1,0 @@
-expressao --> soma
-
-soma --> mult (('+' | '-') mult)*
-
-mult --> valor (('*' | '/') valor)*
-
-valor --> inteiro | decimal | id | '(' expressao ')' | '-'valor

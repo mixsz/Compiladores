@@ -4,10 +4,13 @@ id --> [a-z] [a-zA-Z0-9]*
 REGEX: [a-z][a-zA-Z0-9]*
 
 tipoInt --> 'INTEIRO'
+REGEX: INTEIRO
 
 tipoFloat --> 'DECIMAL'
+REGEX: DECIMAL
 
 tipoString   --> 'TEXTO'
+REGEX: TEXTO
 
 espaco --> ' ' | \t | \n | \r
 REGEX: [ \t\n\r]+ -> skip ;
@@ -23,10 +26,10 @@ REGEX 1: "[a-zA-Z0-9 !@#$%&*()_+\-=\[\]{}.,;:?\\]*"
 ou
 REGEX 2:"[^"]*"
 
-caracEspecial --> [! | @ | # | $ | % | & | * | () | _ | + | \- | = | \[ | \] | { | } | . | , | ; | : | ? | \\]
-REGEX: [!@#$%&*()_+\-=\[\]{}.,;:?\\]
+caracEspecial --> ! | @ | # | $ | % | & | * | ( | ) | _ | + | \- | = | \[ | \] | { | } | . | , | ; | : | ? | \\
+REGEX: [!@#$%&*\(\)_+\-=\[\]{}.,;:?\\]
 
-aP --> '('
+abreP --> '('
 REGEX: \(
 
 fechaP --> ')'
@@ -34,3 +37,27 @@ REGEX: \)
 
 opArit --> '+' | '-' | '*' | '/'
 REGEX: [+\-*/]
+
+opAtrib --> '='
+REGEX: =
+
+se --> 'SE'
+REGEX: SE
+
+fim --> ';'
+REGEX: ;
+
+senao --> 'SENAO'
+REGEX: SENAO
+
+senaose --> 'SENAOSE'
+REGEX: SENAOSE
+
+opRelac --> '==' | '!=' | '<' | '>' | '<=' | '>='
+REGEX: (==|!=|<=|>=|<|>) 
+
+abreC --> '{'
+REGEX: \{
+
+fechaC --> '}'
+REGEX: \}
