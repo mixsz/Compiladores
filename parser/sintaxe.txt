@@ -38,5 +38,3 @@ condicao --> expressao opRelac expressao
 bloco --> instrucao bloco | ε
 
 instrucao --> declarar fim | atribuir fim | estruturaIf  // *IMPORTANTE: ADICIONAR LOOP E ETC AQUI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-

@@ -1,63 +1,39 @@
 TOKENS:
 
 id --> [a-z] [a-zA-Z0-9]*           
-REGEX: [a-z][a-zA-Z0-9]*
 
 tipoInt --> 'INTEIRO'
-REGEX: INTEIRO
 
 tipoFloat --> 'DECIMAL'
-REGEX: DECIMAL
 
 tipoString   --> 'TEXTO'
-REGEX: TEXTO
 
 espaco --> ' ' | \t | \n | \r
-REGEX: [ \t\n\r]+ -> skip ;
 
 inteiro --> [0-9]+              
-REGEX: [0-9]+
 
 decimal --> [0-9]+ '.' [0-9]+  
-REGEX: [0-9]+\.[0-9]+
 
-texto --> '"'(a-z | A-Z | ' ' | 0-9 | caracEspecial)* '"' 
-REGEX 1: "[a-zA-Z0-9 !@#$%&*()_+\-=\[\]{}.,;:?\\]*"
-ou
-REGEX 2:"[^"]*"
-
-caracEspecial --> ! | @ | # | $ | % | & | * | ( | ) | _ | + | \- | = | \[ | \] | { | } | . | , | ; | : | ? | \\
-REGEX: [!@#$%&*\(\)_+\-=\[\]{}.,;:?\\]
+texto --> '"' (a-z | A-Z | ' ' | 0-9 | ! | @ | # | $ | % | & | * | _ | + | - | = | [ | ] | { | } | . | , | ; | : | ? | '\' | '|' | '(' | ')' )* '"'
 
 abreP --> '('
-REGEX: \(
 
 fechaP --> ')'
-REGEX: \)
 
 opArit --> '+' | '-' | '*' | '/'
-REGEX: [+\-*/]
 
 opAtrib --> '='
-REGEX: =
 
 se --> 'SE'
-REGEX: SE
-
-fim --> ';'
-REGEX: ;
 
 senao --> 'SENAO'
-REGEX: SENAO
 
 senaose --> 'SENAOSE'
-REGEX: SENAOSE
+
+fim --> ';'
 
 opRelac --> '==' | '!=' | '<' | '>' | '<=' | '>='
-REGEX: (==|!=|<=|>=|<|>) 
 
 abreC --> '{'
-REGEX: \{
 
 fechaC --> '}'
-REGEX: \}
