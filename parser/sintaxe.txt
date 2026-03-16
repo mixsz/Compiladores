@@ -17,9 +17,15 @@ tipos --> tipoInt | tipoFloat | tipoString
 
 declarar --> tipos id inicializar
 
-inicializar --> opAtrib expressao | ε
+inicializar --> opAtrib conteudoInicial | ε
 
-atribuir --> id opAtrib expressao
+conteudoInicial --> expressao | leia '(' tipos ')'
+
+atribuir --> id opAtrib destinoAtribuicao
+
+destinoAtribuicao --> expressao | leia '(' tipos ')'
+
+comentar --> comentario texto
 
 
 
@@ -30,11 +36,42 @@ estruturaElseif --> senaose '(' condicao ')' '{' bloco '}' estruturaElseif | ε
 
 estruturaElse --> senao '{' bloco '}' | ε
 
-condicao --> expressao opRelac expressao
+
+
+
+
+condicao --> termoE condicaoResto
+
+condicaoResto --> ou termoE condicaoResto | ε
+
+termoE --> relacional termoEResto
+
+termoEResto --> e relacional termoEResto | ε
+
+relacional --> expressao opRelac expressao | '(' condicao ')'
+
+
+
+
+estruturaWhile --> enquanto '(' condicao ')' '{' bloco '}'
+
+estruturaFor --> para '(' (atribuir|declarar) fim condicao fim (atribuir|crementar) ')' '{' bloco '}'
+
+
+
+
+estruturaEscrever --> escreva '('  (expressao) restoTexto ')'
+
+restoTexto --> '+' (expressao) restoTexto | ε
+
+
+
+
+iniciar --> inicie ':' bloco
 
 
 
 
 bloco --> instrucao bloco | ε
 
-instrucao --> declarar fim | atribuir fim | estruturaIf  // *IMPORTANTE: ADICIONAR LOOP E ETC AQUI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+instrucao --> declarar fim | atribuir fim | crementar fim | estruturaIf | estruturaWhile | estruturaFor | quebre fim | continue fim | estruturaEscrever fim | comentar fim
