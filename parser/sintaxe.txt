@@ -27,6 +27,7 @@ destinoAtribuicao --> expressao | leia '(' tipos ')'
 
 comentar --> comentario texto
 
+crementar --> id opCremento
 
 
 
