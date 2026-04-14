@@ -60,5 +60,5 @@ escreva --> 'ESCREVA'
 
 inicie --> 'INICIE'
 
-comentario --> 'COMENTE'
+comente --> 'COMENTE'
 

@@ -17,15 +17,13 @@ tipos --> tipoInt | tipoFloat | tipoString
 
 declarar --> tipos id inicializar
 
-inicializar --> opAtrib conteudoInicial | ε
+inicializar --> opAtrib atributo | ε
 
-conteudoInicial --> expressao | leia '(' tipos ')'
+atributo --> expressao | leia '(' tipos ')'
 
-atribuir --> id opAtrib destinoAtribuicao
+atribuir --> id opAtrib atributo
 
-destinoAtribuicao --> expressao | leia '(' tipos ')'
-
-comentar --> comentario texto
+comentar --> comente texto
 
 crementar --> id opCremento
 
