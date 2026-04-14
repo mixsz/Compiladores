@@ -1,5 +1,3 @@
-// TOKENS:
-
 id --> [a-z] [a-zA-Z0-9]*           
 
 tipoInt --> 'INTEIRO'

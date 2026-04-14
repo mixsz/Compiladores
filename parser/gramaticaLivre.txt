@@ -1,3 +1,15 @@
+iniciar --> inicie ':' bloco
+
+
+
+
+bloco --> instrucao bloco | ε
+
+instrucao --> declarar fim | atribuir fim | crementar fim | estruturaIf | estruturaWhile | estruturaFor | quebre fim | continue fim | estruturaEscrever fim | comentar fim
+
+
+
+
 expressao --> soma
 
 soma --> mult somaResto
@@ -62,15 +74,3 @@ estruturaFor --> para '(' (atribuir|declarar) fim condicao fim (atribuir|crement
 estruturaEscrever --> escreva '('  (expressao) restoTexto ')'
 
 restoTexto --> '+' (expressao) restoTexto | ε
-
-
-
-
-iniciar --> inicie ':' bloco
-
-
-
-
-bloco --> instrucao bloco | ε
-
-instrucao --> declarar fim | atribuir fim | crementar fim | estruturaIf | estruturaWhile | estruturaFor | quebre fim | continue fim | estruturaEscrever fim | comentar fim
