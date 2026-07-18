@@ -23,8 +23,8 @@ O compilador segue um pipeline tradicional de compilação, dividido em quatro m
 
 | Etapa | Função |
 |---|---|
-| **Lexer** | Converte o código-fonte `.ABCD` em uma sequência de tokens e verifica-os conforme as expressões regulares definidas em `lexer/expressaoRegular.txt` |
-| **Parser** | Constrói a árvore sintática abstrata (AST) a partir dos tokens e verifica se essa sequência está correta conforme a GLC definida em `parser/gramaticaLivre.txt` |
+| **Lexer** | Reconhece os tokens percorrendo o código fonte, valida cada um conforme as expressões regulares definidas em `lexer/expressaoRegular.txt` e os armazena em uma lista |
+| **Parser** | Verifica se a sequência de tokens é válida conforme a GLC definida em `parser/gramaticaLivre.txt`, construindo a AST simultaneamente |
 | **Semantic** | Valida a AST (escopos, tipos, redeclarações, variáveis não utilizadas) usando uma pilha de escopos (hash) |
 | **CodeGen** | Percorre a AST e gera o código Go equivalente (`saida.go`) |
 
