@@ -2,69 +2,85 @@
 
 Compilador da linguagem ABCD, desenvolvido em Java como projeto de Compiladores. A linguagem ABCD é traduzida para Go, gerando o arquivo `saida.go`.
 
----
+## Sumário
+
+- [Sobre o projeto](#sobre-o-projeto)
+- [Arquitetura](#arquitetura)
+- [Requisitos](#requisitos)
+- [Como executar](#como-executar)
+- [Características da linguagem](#características-da-linguagem)
+- [Exemplos de código](#exemplos-de-código)
+- [Syntax Highlighting (VS Code)](#syntax-highlighting-vs-code)
+- [Estrutura do projeto](#estrutura-do-projeto)
+
+## Sobre o projeto
+
+ABCD é uma linguagem de programação com sintaxe em português. O compilador implementa um pipeline completo de compilação, desde a análise léxica até a geração de código Go executável.
+
+## Arquitetura
+
+O compilador segue um pipeline tradicional de compilação, dividido em quatro módulos principais:
+
+| Etapa | Função |
+|---|---|
+| **Lexer** | Converte o código-fonte `.ABCD` em uma sequência de tokens e verifica-os conforme as expressões regulares definidas em `lexer/expressaoRegular.txt` |
+| **Parser** | Constrói a árvore sintática abstrata (AST) a partir dos tokens e verifica se essa sequência está correta conforme a GLC definida em `parser/gramaticaLivre.txt` |
+| **Semantic** | Valida a AST (escopos, tipos, redeclarações, variáveis não utilizadas) usando uma pilha de escopos (hash) |
+| **CodeGen** | Percorre a AST e gera o código Go equivalente (`saida.go`) |
+
+```
+main.ABCD → Lexer → Parser → Semantic → CodeGen → saida.go
+```
 
 ## Requisitos
 
-- Java JDK instalado
-- Go instalado
+- Java JDK
+- Go
 
----
+## Como executar
 
-## Como Executar
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/mixsz/Compilador.git
+   cd Compilador
+   ```
+2. Compile o projeto:
+   ```bash
+   javac */*.java Main.java
+   ```
+3. Escreva seu código no arquivo `main.ABCD`.
+4. Execute o compilador:
+   ```bash
+   java -cp . Main
+   ```
+5. O código Go gerado é salvo em `saida.go` e executado automaticamente.
 
-1. Acesse o repositório em [https://github.com/mixsz/Compilador](https://github.com/mixsz/Compilador) e instale em sua máquina
-2. Compile com:
-```
-javac */*.java Main.java
-```
-3. Escreva seu código no arquivo `main.ABCD`
-4. Execute com:
-```
-java -cp . Main
-```
-5. O código Go será salvo em `saida.go` e executado automaticamente
+## Características da linguagem
 
----
-
-## Características da Linguagem
-
-- Identificadores devem obrigatoriamente começar com letra minúscula e não podem conter caracteres especiais.
-- As palavras reservadas são sempre escritas em letras maiúsculas e em português (ex: `SE`, `ENQUANTO`, `INTEIRO`).
+- Identificadores devem começar com letra minúscula e não podem conter caracteres especiais.
+- Palavras reservadas são escritas em maiúsculas e em português (ex: `SE`, `ENQUANTO`, `INTEIRO`).
 - Todas as instruções, incluindo comentários, só são válidas após a declaração `INICIE:`.
-- É possível declarar e ler uma variável na mesma linha, por exemplo: `INTEIRO id = LEIA(INTEIRO);`.
-- A linguagem possui apenas 3 tipos de variáveis: `INTEIRO` (int), `DECIMAL` (float) e `TEXTO` (string).
-- Operadores aritméticos suportados: `+`, `-`, `*`, `/`
-- Operadores relacionais suportados: `==`, `!=`, `<`, `>`, `<=`, `>=`
-- Operadores lógicos suportados: `E` (and) e `OU` (or)
-- Estruturas de controle disponíveis: `SE`, `SENAOSE`, `SENAO`, `ENQUANTO`, `PARA`
+- É possível declarar e ler uma variável na mesma linha: `INTEIRO id = LEIA(INTEIRO);`.
+- Três tipos de variáveis: `INTEIRO` (int), `DECIMAL` (float) e `TEXTO` (string).
+- Operadores aritméticos: `+`, `-`, `*`, `/`
+- Operadores relacionais: `==`, `!=`, `<`, `>`, `<=`, `>=`
+- Operadores lógicos: `E` (and) e `OU` (or)
+- Estruturas de controle: `SE`, `SENAOSE`, `SENAO`, `ENQUANTO`, `PARA`
 - Suporte a `QUEBRE` e `CONTINUE` dentro de laços
-- Saída de dados com `ESCREVA` e entrada com `LEIA`
+- Saída com `ESCREVA` e entrada com `LEIA`
 - Comentários de linha com `COMENTE`
-- A linguagem é traduzida para Go, gerando o arquivo `saida.go`
-- Variáveis não utilizadas geram erro semântico (igual em Go)
-- Redeclaração de variável gera erro semântico
-- Operadores `-`, `*`, `/` com TEXTO geram erro semântico (`+` é permitido como concatenação)
-- Variáveis declaradas dentro de escopo não existem fora deles
 
----
+### Regras semânticas
 
----
+- Variáveis não utilizadas geram erro semântico (igual ao Go).
+- Redeclaração de variável gera erro semântico.
+- Operadores `-`, `*`, `/` com `TEXTO` geram erro semântico (`+` é permitido como concatenação).
+- Variáveis declaradas dentro de um escopo não existem fora dele.
 
-## Syntax Highlighting
+## Exemplos de código
 
-Para ter syntax highlighting (tokens com cores) no VSCode:
+### Soma de 1 até N
 
-1. Clique com o botão direito no arquivo `abcd-lang-1.0.0.vsix`
-2. Clique em `Install Extension VSIX`
-
-> Se quiser editar as cores, modifique `abcd/syntaxes/abcd.tmLanguage.json`, entre na pasta `abcd/` e rode `vsce package --allow-missing-repository` para gerar um novo `.vsix`. É necessário ter o `vsce` instalado: `npm install -g @vscode/vsce`
-
----
-
-## Exemplos de Código
-
-### Exemplo 1 - Soma de 1 até N
 ```
 INICIE:
     INTEIRO soma = 0;
@@ -76,7 +92,8 @@ INICIE:
     ESCREVA("Soma:" + soma);
 ```
 
-### Exemplo 2 - Positivo, Negativo ou Zero
+### Positivo, negativo ou zero
+
 ```
 INICIE:
     INTEIRO num = LEIA(INTEIRO);
@@ -91,7 +108,8 @@ INICIE:
     }
 ```
 
-### Exemplo 3 - Fatorial
+### Fatorial
+
 ```
 INICIE:
     INTEIRO numero = LEIA(INTEIRO);
@@ -104,7 +122,8 @@ INICIE:
     COMENTE "Isso é um comentário";
 ```
 
-### Exemplo 4 - Utilização de QUEBRE e CONTINUE
+### QUEBRE e CONTINUE
+
 ```
 INICIE:
     PARA(INTEIRO i = 0; i < 10; i++){
@@ -116,4 +135,26 @@ INICIE:
         }
         ESCREVA(i);
     }
+```
+
+## Syntax Highlighting (VS Code)
+
+Para ter destaque de sintaxe (tokens coloridos) no VS Code:
+
+1. Clique com o botão direito no arquivo `abcd-lang-1.0.0.vsix`.
+2. Clique em `Install Extension VSIX`.
+
+> Para editar as cores, modifique `abcd/syntaxes/abcd.tmLanguage.json`, entre na pasta `abcd/` e rode `vsce package --allow-missing-repository` para gerar um novo `.vsix`. É necessário ter o `vsce` instalado: `npm install -g @vscode/vsce`.
+
+## Estrutura do projeto
+
+```
+Compilador/
+├── abcd/          # Extensão de syntax highlighting para VS Code
+├── codegen/        # Geração de código Go a partir da AST
+├── lexer/          # Análise léxica (tokenização)
+├── parser/          # Análise sintática (construção da AST)
+├── semantic/        # Análise semântica (escopos, tipos, validações)
+├── Main.java        # Ponto de entrada do compilador
+└── main.ABCD         # Arquivo de exemplo/entrada
 ```
